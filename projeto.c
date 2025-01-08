@@ -3,16 +3,18 @@
 #include <locale.h> // biblioteca de alocação de texto por região
 #include <string.h> // bliblioteca responsável por cuidar das string
 
-int registro()
+int registro() //função responsvel por cadastrar os usuarios no sistema
 {
+	// inicio da criaação de variaveis/string
 	char arquivo[40];
 	char cpf[40];
 	char nome[40];
 	char sobrenome[40];
 	char cargo[40];
+	// final da criaação de variaveis/string
 	
-	printf("Digite o CPF a ser cadastrado: ");
-	scanf("%s", cpf);
+	printf("Digite o CPF a ser cadastrado: "); //coletando informaçoes do usuario
+	scanf("%s", cpf); // %s refere-se a string
 	
 	strcpy(arquivo, cpf); //resposvel por copiar os valores da string
 	
@@ -82,10 +84,23 @@ int consulta()
 	system("pause");
 		
 }
-int deletar()
+	int deletar()
 	{
-		printf("Vocé escolheu deletar nome! \n");
-		system("pause");
+		char cpf[40];
+		
+		printf("Digite o cpf a ser deletado: ");
+		scanf("%s",cpf);
+		
+		remove(cpf);
+		
+		FILE *file;
+		file = fopen(cpf, "r");
+		
+		if(file == NULL);
+		{
+			printf("o usuário não se encontra no sistema!.\n");
+			system("pause");
+		}
 	}
 	
 	
@@ -100,23 +115,24 @@ int main()
 	
 		system("cls");
 		
-		setlocale(LC_ALL, "portuguese"); //armazenamento da linguagem
+		setlocale(LC_ALL, "portuguese"); //definindo a linguagem
 	
 		printf("### Cartório da EBAC ###\n\n"); //inicio de menu
 		printf("escolha a opção desejada do menu:\n\n");
 		printf("\t1 - registrar nomes\n");
 		printf("\t2 - consultar nomes\n");
-		printf("\t3 - deletar nomes\n\n");
+		printf("\t3 - Deletar nomes\n");
+		printf("\t4 - sair do sistema\n");
 		printf("Opcão: "); // fim do menu
 	
 		scanf("%d", &opcao); // armazenando a escolha do usuário
 	
-		system("cls");
+		system("cls"); //responsalveu por limpar a tela
 	
-		switch(opcao)
+		switch(opcao) //chamada de funçoes
 		{
 			case 1:
-			registro();
+			registro();//chamada de funçoes
 			break;
 			
 			case 2:
@@ -125,6 +141,11 @@ int main()
 		
 			case 3:
 			deletar();
+			break;
+			
+			case 4:
+			printf("Obrigado por utilizar o sistema\n");
+			return 0;
 			break;
 			
 			default:
